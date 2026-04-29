@@ -6,16 +6,16 @@ Este site permite leitura, indexação e citação por crawlers, buscadores e as
 
 ## Site
 
-- Home: https://www.meuscontoseroticos.com.br/
-- Sitemap: https://www.meuscontoseroticos.com.br/sitemap-index.xml
-- RSS: https://www.meuscontoseroticos.com.br/rss.xml
+- Home: https://meuscontoseroticos.com.br/
+- Sitemap: https://meuscontoseroticos.com.br/sitemap-index.xml
+- RSS: https://meuscontoseroticos.com.br/rss.xml
 
 ## Trilhas
 
-- Blog: https://www.meuscontoseroticos.com.br/trilhas/blog/
-- Dicas: https://www.meuscontoseroticos.com.br/trilhas/dicas/
-- Escrita: https://www.meuscontoseroticos.com.br/trilhas/escrita/
-- Universo: https://www.meuscontoseroticos.com.br/trilhas/universo/
+- Blog: https://meuscontoseroticos.com.br/trilhas/blog/
+- Dicas: https://meuscontoseroticos.com.br/trilhas/dicas/
+- Escrita: https://meuscontoseroticos.com.br/trilhas/escrita/
+- Universo: https://meuscontoseroticos.com.br/trilhas/universo/
 
 ## Uso
 
