@@ -1,0 +1,243 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: string;
+  ogType?: "website" | "article";
+  publishedAt?: Date;
+  updatedAt?: Date;
+  image?: string;
+  keywords?: string[];
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+}
+const {
+  title,
+  description,
+  canonicalURL,
+  ogType = "website",
+  publishedAt,
+  updatedAt,
+  image,
+  keywords = [],
+  structuredData,
+  noindex = false,
+} = Astro.props;
+const siteName = "Oficina de Contos";
+const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const canonical = canonicalURL ?? new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = new URL(image ?? "/opengraph.webp", siteUrl).href;
+const jsonLd = structuredData
+  ? JSON.stringify(structuredData).replace(/</g, "\\u003c")
+  : undefined;
+---
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
+  <meta name="author" content={siteName} />
+  <meta name="generator" content="Astro" />
+  <meta name="theme-color" content="#2f2223" />
+  <meta name="color-scheme" content="light dark" />
+  {keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" type="application/rss+xml" title={`${siteName} RSS`} href={new URL("/rss.xml", siteUrl).href} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:alt" content={title} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  {publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
+  {updatedAt && <meta property="article:modified_time" content={updatedAt.toISOString()} />}
+  {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+  <link rel="stylesheet" href="/colors_and_type.css" />
+  <script is:inline>
+    (function(){
+      var s=localStorage.getItem("theme");
+      var p=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+      document.documentElement.setAttribute("data-theme",s||p);
+    })();
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:var(--font-sans);
+      color:var(--ink-90);
+      background:
+        radial-gradient(1200px 600px at 90% -10%, oklch(0.93 0.05 14 / .55), transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, oklch(0.94 0.04 40 / .50), transparent 60%),
+        var(--page);
+      min-height:100vh;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    [data-theme="dark"] body{
+      background:
+        radial-gradient(1200px 600px at 90% -10%, oklch(0.22 0.05 14 / .4), transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, oklch(0.20 0.04 40 / .35), transparent 60%),
+        var(--page);
+    }
+
+    /* Faixa de edição no topo absoluto */
+    .edition-strip{
+      background: var(--deep);
+      color: var(--page);
+      text-align: center;
+      padding: 8px 16px;
+      font: 600 10px/1 var(--font-sans);
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    [data-theme="dark"] .edition-strip{
+      background: var(--primary-strong);
+      color: oklch(0.13 0.012 14);
+    }
+
+    [data-theme="dark"]{
+      --page:           oklch(0.13 0.012 14);
+      --paper:          oklch(0.13 0.012 14);
+      --card:           oklch(0.17 0.014 14);
+      --soft:           oklch(0.20 0.015 14);
+      --line:           oklch(0.26 0.014 14);
+      --ink-90:         oklch(0.94 0.008 14);
+      --ink-70:         oklch(0.78 0.010 14);
+      --ink-50:         oklch(0.58 0.010 14);
+      --ink-30:         oklch(0.40 0.008 14);
+      --deep:           oklch(0.95 0.008 14);
+      --deep-text:      oklch(0.95 0.008 14);
+      --primary:        oklch(0.74 0.09 14);
+      --primary-strong: oklch(0.82 0.10 14);
+      --selection-bg:   oklch(0.28 0.05 14);
+    }
+
+    ::selection{background:var(--selection-bg);color:var(--deep)}
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    /* ── Top bar ── */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:24px 32px;
+      max-width:1100px;
+      margin:0 auto;
+      border-bottom:1px solid var(--line);
+    }
+    @media(max-width:600px){.topbar{padding:18px 20px}}
+
+    .brand{
+      font-family:var(--font-serif);
+      font-style:italic;
+      font-weight:500;
+      font-size:22px;
+      color:var(--deep);
+      letter-spacing:0;
+      text-decoration:none;
+      line-height:1;
+    }
+    .brand .dot{color:var(--primary-strong)}
+
+    .top-right{display:flex;align-items:center;gap:24px}
+    .top-link{
+      font:500 13px/1 var(--font-sans);
+      color:var(--ink-70);
+      text-decoration:none;
+      letter-spacing:0;
+    }
+    .top-link:hover{color:var(--deep)}
+
+    .theme-btn{
+      background:none;
+      border:none;
+      cursor:pointer;
+      color:var(--ink-50);
+      font-size:18px;
+      padding:4px 8px;
+      line-height:1;
+      transition:color .2s;
+    }
+    .theme-btn:hover{color:var(--deep)}
+
+    /* ── Footer ── */
+    .site-footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:64px 32px 48px;
+      border-top:1px solid var(--line);
+      margin-top:120px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:24px;
+      flex-wrap:wrap;
+      color:var(--ink-50);
+      font-size:13px;
+    }
+    @media(max-width:600px){.site-footer{padding:48px 20px 32px}}
+    .site-footer .fb{
+      font-family:var(--font-serif);
+      font-style:italic;
+      font-size:18px;
+      color:var(--deep);
+      text-decoration:none;
+      letter-spacing:0;
+    }
+    .site-footer .fb .dot{color:var(--primary-strong)}
+  </style>
+</head>
+<body>
+  <div class="edition-strip">oficina editorial de escrita</div>
+  <header class="topbar">
+    <a class="brand" href="/">oficina<span class="dot">.</span></a>
+    <div class="top-right">
+      <a class="top-link" href="/">Arquivo</a>
+      <a class="top-link" href="/#trilhas">Trilhas</a>
+      <button class="theme-btn" id="theme-toggle" aria-label="Alternar tema">
+        <span id="theme-icon">☀</span>
+      </button>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="site-footer">
+    <a class="fb" href="/">oficina<span class="dot">.</span></a>
+    <span>ensaios, tecnicas e exercicios para escrever contos</span>
+  </footer>
+
+  <script>
+    const btn=document.getElementById("theme-toggle");
+    const icon=document.getElementById("theme-icon");
+    function sync(){
+      const d=document.documentElement.getAttribute("data-theme")==="dark";
+      if(icon)icon.textContent=d?"☾":"☀";
+    }
+    sync();
+    btn?.addEventListener("click",()=>{
+      const n=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
+      document.documentElement.setAttribute("data-theme",n);
+      localStorage.setItem("theme",n);
+      sync();
+    });
+  </script>
+</body>
+</html>

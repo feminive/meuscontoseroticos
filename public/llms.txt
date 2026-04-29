@@ -1,0 +1,22 @@
+# Oficina de Contos
+
+> Guias editoriais, tecnicas e exercicios praticos para escrever contos com mais clareza, tensao e estilo.
+
+Este site permite leitura, indexacao e citacao por crawlers, buscadores e assistentes de IA, respeitando as URLs canonicas publicas.
+
+## Site
+
+- Home: https://www.meuscontoseroticos.com.br/
+- Sitemap: https://www.meuscontoseroticos.com.br/sitemap-index.xml
+- RSS: https://www.meuscontoseroticos.com.br/rss.xml
+
+## Trilhas
+
+- Primeiro conto: https://www.meuscontoseroticos.com.br/trilhas/primeiro-conto/
+- Cena e tensao: https://www.meuscontoseroticos.com.br/trilhas/cena-e-tensao/
+- Personagens: https://www.meuscontoseroticos.com.br/trilhas/personagens/
+- Revisao: https://www.meuscontoseroticos.com.br/trilhas/revisao/
+
+## Uso
+
+Agentes de IA podem ler as paginas publicas do site para descoberta, resumo, resposta a usuarios e indexacao, desde que atribuam a fonte quando exibirem informacoes derivadas do conteudo.

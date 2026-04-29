@@ -1,0 +1,585 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { descriptionFromTag, slugifyTag, titleFromTag } from "../lib/trilhas";
+
+const allPosts = await getCollection("posts");
+const sorted = allPosts.sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+const featured = sorted.find((p) => p.data.featured) ?? sorted[0];
+const rest = sorted.filter((p) => p.id !== featured.id);
+const latest = rest.slice(0, 4);
+const startPosts = sorted.slice(0, 3);
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+
+const featBody = (featured.body || "").trim();
+const featParas = featBody.split(/\n\s*\n/).slice(0, 2);
+
+const tagCounts = new Map<string, number>();
+for (const post of sorted) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+  }
+}
+const tracks = [...tagCounts.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "pt-BR"))
+  .map(([tag, count]) => ({
+    tag,
+    slug: slugifyTag(tag),
+    title: titleFromTag(tag),
+    kicker: "tag",
+    description: descriptionFromTag(tag),
+    count,
+  }));
+
+function fmt(d: Date) {
+  return d.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+}
+function fmtShort(d: Date) {
+  return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit" });
+}
+---
+<BaseLayout
+  title="Oficina de Contos"
+  description="Guias editoriais, tecnicas e exercicios praticos para escrever contos com mais clareza, tensao e estilo."
+  keywords={[
+    "como escrever contos",
+    "escrita criativa",
+    "tecnicas de escrita",
+    "oficina de contos",
+    "estrutura de conto",
+    "personagens",
+    "revisao de texto",
+  ]}
+  structuredData={[
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Oficina de Contos",
+      url: new URL("/", siteUrl).href,
+      inLanguage: "pt-BR",
+      description: "Guias editoriais, tecnicas e exercicios praticos para escrever contos com mais clareza, tensao e estilo.",
+      publisher: {
+        "@type": "Organization",
+        name: "Meus Contos Eroticos",
+        url: new URL("/", siteUrl).href,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Trilhas de escrita criativa",
+      itemListElement: tracks.map((track, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: track.title,
+        url: new URL(`/trilhas/${track.slug}/`, siteUrl).href,
+      })),
+    },
+  ]}
+>
+
+  <main class="page">
+
+    <section class="masthead">
+      <div class="mast-copy">
+        <span class="eyebrow-text">guia editorial</span>
+        <h1 class="mast-title">
+          Aprenda a escrever <em>contos</em> com metodo e voz.
+        </h1>
+      </div>
+      <p class="mast-dek">
+        Uma revista-oficina para transformar ideias soltas em cenas, personagens, finais e textos revisados.
+      </p>
+    </section>
+
+    <section class="front-grid" aria-label="Destaques editoriais">
+      <article class="hero">
+        <a href={`/${featured.id}`} class="hero-anchor" aria-label={`Ler ${featured.data.title}`}></a>
+        <div class="hero-meta">
+          <span class="hero-num">aula 01</span>
+          <span class="hero-divider"></span>
+          <time datetime={featured.data.publishedAt.toISOString()}>{fmt(featured.data.publishedAt)}</time>
+        </div>
+        <h2 class="hero-title">{featured.data.title}</h2>
+        <p class="hero-dek">{featured.data.description}</p>
+
+        <div class="hero-excerpt prose">
+          {featParas.map((p) => <p>{p}</p>)}
+        </div>
+
+        <div class="hero-foot">
+          <span class="hero-cta">Continuar lendo</span>
+          <span class="hero-rule"></span>
+          <span class="hero-time">5 min</span>
+        </div>
+      </article>
+
+      <aside class="start-here" aria-label="Comece por aqui">
+        <span class="side-label">comece por aqui</span>
+        <ol class="starter-list">
+          {startPosts.map((post) => (
+            <li>
+              <a href={`/${post.id}/`}>
+                <strong>{post.data.title}</strong>
+                <span>{post.data.description}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </aside>
+    </section>
+
+    <section class="tracks" id="trilhas" aria-labelledby="tracks-title">
+      <div class="section-head">
+        <span class="section-kicker">trilhas</span>
+        <h2 id="tracks-title">Oficina por tecnica</h2>
+      </div>
+      <div class="track-grid">
+        {tracks.map((track) => (
+          <a class="track" href={`/trilhas/${track.slug}/`}>
+            <span>{track.kicker}</span>
+            <h3>{track.title}</h3>
+            <p>{track.description}</p>
+            <small>{track.count} {track.count === 1 ? "conto" : "contos"}</small>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="archive" aria-labelledby="archive-title">
+      <header class="arch-head">
+        <span class="arch-label">arquivo</span>
+        <h2 id="archive-title" class="arch-title">Leituras <em>recentes</em></h2>
+        <span class="arch-count">{rest.length} contos</span>
+      </header>
+
+      <ol class="arch-list">
+        {latest.map((post, i) => (
+          <li class="arch-item">
+            <a class="arch-row" href={`/${post.id}`}>
+              <span class="arch-num">{String(i + 2).padStart(2, "0")}</span>
+              <div class="arch-body">
+                <h3 class="arch-h3">{post.data.title}</h3>
+                <p class="arch-p">{post.data.description}</p>
+              </div>
+              <time class="arch-date" datetime={post.data.publishedAt.toISOString()}>
+                {fmtShort(post.data.publishedAt)}
+              </time>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+  </main>
+
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  @media(max-width:700px){.page{padding:0 20px}}
+
+  .masthead {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+    gap: 40px;
+    align-items: end;
+    padding: 84px 0 64px;
+    border-bottom: 1px solid var(--line);
+  }
+  @media(max-width:820px){
+    .masthead{grid-template-columns:1fr;padding:56px 0 44px;gap:24px}
+  }
+
+  .eyebrow-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--primary-strong);
+  }
+  .eyebrow-text::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--primary-strong);
+  }
+
+  .mast-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(48px, 8vw, 104px);
+    line-height: 0.96;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0;
+    max-width: 10ch;
+  }
+  .mast-title em { font-style: italic; color: var(--primary-strong); }
+
+  .mast-dek {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 25px);
+    line-height: 1.45;
+    color: var(--ink-70);
+    margin: 0 0 8px;
+  }
+
+  .front-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 48px;
+    padding: 72px 0 80px;
+    border-bottom: 1px solid var(--line);
+  }
+  @media(max-width:900px){
+    .front-grid{grid-template-columns:1fr;gap:40px;padding:52px 0 60px}
+  }
+
+  .hero {
+    position: relative;
+    min-width: 0;
+  }
+  .hero-anchor {
+    position: absolute;
+    inset: -12px;
+    z-index: 1;
+  }
+  .hero > *:not(.hero-anchor) { position: relative; z-index: 2; pointer-events: none; }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 26px;
+    font: 500 12px/1 var(--font-mono);
+    letter-spacing: 0;
+    color: var(--ink-50);
+    text-transform: lowercase;
+  }
+  .hero-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--primary-strong);
+  }
+  .hero-divider {
+    flex: 0 0 28px;
+    height: 1px;
+    background: var(--ink-30);
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.03;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0 0 22px;
+    transition: color .2s;
+  }
+  .hero:hover .hero-title { color: var(--primary-strong); }
+
+  .hero-dek {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink-70);
+    margin: 0 0 36px;
+    max-width: 58ch;
+  }
+
+  .hero-excerpt :global(p) {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--ink-90);
+    margin: 0 0 1.35em;
+    max-width: 66ch;
+  }
+  .hero-excerpt :global(p:first-of-type::first-letter) {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 4em;
+    line-height: 0.82;
+    float: left;
+    padding: 4px 12px 0 0;
+    color: var(--primary-strong);
+  }
+  .hero-excerpt :global(em) { color: var(--primary-strong); font-style: italic; }
+
+  .hero-foot {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .hero-cta {
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0;
+    color: var(--deep);
+    border-bottom: 1px solid var(--deep);
+    padding-bottom: 4px;
+  }
+  .hero-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    max-width: 72px;
+  }
+  .hero-time {
+    font: 500 12px/1 var(--font-mono);
+    letter-spacing: 0;
+    color: var(--ink-50);
+  }
+
+  .start-here {
+    border-left: 1px solid var(--line);
+    padding-left: 32px;
+    align-self: stretch;
+  }
+  @media(max-width:900px){
+    .start-here{border-left:0;border-top:1px solid var(--line);padding:32px 0 0}
+  }
+  .side-label {
+    display: block;
+    margin-bottom: 22px;
+    font: 700 11px/1 var(--font-sans);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--primary-strong);
+  }
+  .starter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: steps;
+  }
+  .starter-list li {
+    counter-increment: steps;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    padding: 0 0 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .starter-list a {
+    display: contents;
+    color: inherit;
+    text-decoration: none;
+  }
+  .starter-list li::before {
+    content: counter(steps, decimal-leading-zero);
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--primary-strong);
+  }
+  .starter-list strong {
+    grid-column: 2;
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--font-serif);
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.18;
+    color: var(--deep);
+    transition: color .2s;
+  }
+  .starter-list a:hover strong { color: var(--primary-strong); }
+  .starter-list span {
+    grid-column: 2;
+    display: block;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-70);
+  }
+
+  .tracks { padding: 72px 0 78px; border-bottom: 1px solid var(--line); }
+  @media(max-width:700px){.tracks{padding:52px 0 58px}}
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  @media(max-width:600px){.section-head{display:block}}
+  .section-kicker {
+    font: 700 11px/1 var(--font-sans);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--primary-strong);
+  }
+  .section-head h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.08;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0;
+  }
+
+  .track-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media(max-width:900px){.track-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}}
+  @media(max-width:560px){.track-grid{grid-template-columns:1fr}}
+
+  .track {
+    background: var(--page);
+    padding: 24px;
+    min-height: 210px;
+    color: inherit;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  [data-theme="dark"] .track { background: var(--paper); }
+  .track:hover { background: var(--soft); }
+  .track span {
+    display: block;
+    margin-bottom: 34px;
+    font: 700 10px/1 var(--font-sans);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--primary-strong);
+  }
+  .track h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 1.14;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0 0 12px;
+  }
+  .track p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-70);
+    margin: 0;
+  }
+  .track small {
+    display: block;
+    margin-top: 26px;
+    font: 600 11px/1 var(--font-sans);
+    color: var(--ink-50);
+    text-transform: uppercase;
+  }
+
+  .archive { padding: 72px 0 40px; }
+  @media(max-width:700px){.archive{padding:52px 0 24px}}
+
+  .arch-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--deep);
+  }
+  .arch-label {
+    font: 700 11px/1 var(--font-sans);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--primary-strong);
+    grid-column: 1;
+  }
+  .arch-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(28px, 3.5vw, 40px);
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0;
+    grid-column: 2;
+  }
+  .arch-title em { font-style: italic; color: var(--primary-strong); }
+  .arch-count {
+    font: 500 11px/1 var(--font-mono);
+    letter-spacing: 0;
+    color: var(--ink-50);
+    text-transform: uppercase;
+    grid-column: 3;
+  }
+  @media(max-width:600px){
+    .arch-head { grid-template-columns: 1fr auto; gap: 8px; }
+    .arch-label { grid-column: 1; grid-row: 1; }
+    .arch-count { grid-column: 2; grid-row: 1; }
+    .arch-title { grid-column: 1 / -1; grid-row: 2; }
+  }
+
+  .arch-list { list-style: none; padding: 0; margin: 0; }
+  .arch-item { border-bottom: 1px solid var(--line); }
+
+  .arch-row {
+    display: grid;
+    grid-template-columns: 48px 1fr 80px;
+    gap: 24px;
+    align-items: baseline;
+    padding: 28px 0 32px;
+    text-decoration: none;
+    transition: padding .2s;
+  }
+  .arch-row:hover { padding-left: 12px; padding-right: 12px; }
+  @media(max-width:600px){
+    .arch-row { grid-template-columns: 32px 1fr; gap: 16px; padding: 22px 0; }
+    .arch-date { display: none; }
+  }
+
+  .arch-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--primary-strong);
+    padding-top: 4px;
+  }
+
+  .arch-h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.18;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0 0 8px;
+    transition: color .2s;
+  }
+  .arch-row:hover .arch-h3 { color: var(--primary-strong); }
+  .arch-p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-70);
+    margin: 0;
+  }
+
+  .arch-date {
+    font: 500 12px/1 var(--font-mono);
+    letter-spacing: 0;
+    color: var(--ink-50);
+    text-align: right;
+    padding-top: 8px;
+  }
+</style>

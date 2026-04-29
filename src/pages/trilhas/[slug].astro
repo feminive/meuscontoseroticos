@@ -1,0 +1,251 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { descriptionFromTag, slugifyTag, titleFromTag } from "../../lib/trilhas";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+  return tags.map((tag) => ({
+    params: { slug: slugifyTag(tag) },
+    props: {
+      trilha: {
+        tag,
+        slug: slugifyTag(tag),
+        title: titleFromTag(tag),
+        kicker: "tag",
+        description: descriptionFromTag(tag),
+      },
+    },
+  }));
+}
+
+const { trilha } = Astro.props as {
+  trilha: {
+    tag: string;
+    slug: string;
+    title: string;
+    kicker: string;
+    description: string;
+  };
+};
+const allPosts = await getCollection("posts");
+const posts = allPosts
+  .filter((post) => post.data.tags.includes(trilha.tag))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(`/trilhas/${trilha.slug}/`, siteUrl).href;
+
+function fmt(d: Date) {
+  return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit" });
+}
+---
+
+<BaseLayout
+  title={trilha.title}
+  description={trilha.description}
+  canonicalURL={canonicalUrl}
+  keywords={[
+    trilha.title,
+    trilha.tag,
+    "como escrever contos",
+    "escrita criativa",
+    "oficina de escrita",
+    "tecnicas narrativas",
+  ]}
+  structuredData={[
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: `${trilha.title} — Oficina de Contos`,
+      description: trilha.description,
+      url: canonicalUrl,
+      inLanguage: "pt-BR",
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Oficina de Contos",
+        url: new URL("/", siteUrl).href,
+      },
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: posts.map((post, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: post.data.title,
+          url: new URL(`/${post.id}/`, siteUrl).href,
+        })),
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Inicio",
+          item: new URL("/", siteUrl).href,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Trilhas",
+          item: new URL("/#trilhas", siteUrl).href,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: trilha.title,
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ]}
+>
+  <main class="category-page">
+    <header class="category-head">
+      <a class="back" href="/#trilhas">voltar para trilhas</a>
+      <span class="kicker">{trilha.kicker}</span>
+      <h1>{trilha.title}</h1>
+      <p>{trilha.description}</p>
+      <span class="count">{posts.length} {posts.length === 1 ? "conto" : "contos"}</span>
+    </header>
+
+    <section class="post-list" aria-label={`Contos em ${trilha.title}`}>
+      {posts.length > 0 ? (
+        <ol>
+          {posts.map((post, i) => (
+            <li>
+              <a class="post-row" href={`/${post.id}/`}>
+                <span class="num">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.description}</p>
+                </div>
+                <time datetime={post.data.publishedAt.toISOString()}>{fmt(post.data.publishedAt)}</time>
+              </a>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="empty">Ainda nao ha contos publicados nesta trilha.</p>
+      )}
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .category-page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 72px 32px 0;
+  }
+  @media(max-width:640px){.category-page{padding:48px 20px 0}}
+
+  .category-head {
+    padding-bottom: 48px;
+    border-bottom: 2px solid var(--deep);
+  }
+  .back {
+    display: inline-block;
+    margin-bottom: 34px;
+    font: 600 13px/1 var(--font-sans);
+    color: var(--primary-strong);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 4px;
+  }
+  .kicker {
+    display: block;
+    margin-bottom: 16px;
+    font: 700 11px/1 var(--font-sans);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--primary-strong);
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(46px, 7vw, 82px);
+    line-height: .98;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0 0 24px;
+  }
+  .category-head p {
+    max-width: 52ch;
+    margin: 0 0 28px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 23px;
+    line-height: 1.45;
+    color: var(--ink-70);
+  }
+  .count {
+    font: 500 12px/1 var(--font-mono);
+    color: var(--ink-50);
+    text-transform: uppercase;
+  }
+
+  .post-list { padding: 28px 0 24px; }
+  .post-list ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .post-list li { border-bottom: 1px solid var(--line); }
+  .post-row {
+    display: grid;
+    grid-template-columns: 48px 1fr 80px;
+    gap: 24px;
+    align-items: baseline;
+    padding: 28px 0 32px;
+    color: inherit;
+    text-decoration: none;
+    transition: padding .2s;
+  }
+  .post-row:hover { padding-left: 12px; padding-right: 12px; }
+  @media(max-width:600px){
+    .post-row{grid-template-columns:34px 1fr;gap:16px}
+    .post-row time{display:none}
+  }
+  .num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--primary-strong);
+  }
+  .post-row h2 {
+    margin: 0 0 8px;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: 0;
+    color: var(--deep);
+    transition: color .2s;
+  }
+  .post-row:hover h2 { color: var(--primary-strong); }
+  .post-row p {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-70);
+  }
+  .post-row time {
+    font: 500 12px/1 var(--font-mono);
+    color: var(--ink-50);
+    text-align: right;
+  }
+  .empty {
+    margin: 0;
+    padding: 36px 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-70);
+  }
+</style>
