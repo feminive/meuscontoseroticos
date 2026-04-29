@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:4321)",
+      "Bash(curl -s http://localhost:4321/o-apartamento-do-quinto-andar)",
+      "Bash(curl -s http://localhost:4321/domingo-sem-planos)",
+      "Bash(rsync -a --exclude='node_modules' site/ .)",
+      "Bash(curl -s http://localhost:4323)",
+      "Bash(curl -s http://localhost:4323/o-apartamento-do-quinto-andar)",
+      "Bash(pkill -f \"astro dev\")",
+      "Bash(curl -s -I http://localhost:4321/colors_and_type.css)",
+      "Bash(curl -s http://localhost:4321/colors_and_type.css)",
+      "Bash(npx playwright *)",
+      "Bash(cp /tmp/shot.mjs /home/feminive/Documents/GitHub/meuscontoseroticos/shot.mjs)",
+      "Bash(node shot.mjs)",
+      "Bash(node /home/feminive/Documents/GitHub/meuscontoseroticos/shot.mjs)"
+    ]
+  }
+}
