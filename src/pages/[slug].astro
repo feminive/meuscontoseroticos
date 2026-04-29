@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { organizationSchema } from "../lib/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -21,7 +22,7 @@ const readMin = Math.max(1, Math.ceil(wordCount / 220));
 
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(`/${post.id}/`, siteUrl).href;
-const shareUrl = encodeURIComponent(canonicalUrl);
+const shareUrl = encodeURIComponent(decodeURI(canonicalUrl));
 const shareText = encodeURIComponent(post.data.title);
 const primaryTag = post.data.tags[0];
 const faqItems = post.data.faq ?? [];
@@ -38,16 +39,8 @@ const structuredData = [
     inLanguage: "pt-BR",
     keywords: post.data.tags.join(", "),
     articleSection: primaryTag,
-    author: {
-      "@type": "Organization",
-      name: "Meus Contos Eroticos",
-      url: new URL("/", siteUrl).href,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Meus Contos Eroticos",
-      url: new URL("/", siteUrl).href,
-    },
+    author: organizationSchema(siteUrl),
+    publisher: organizationSchema(siteUrl),
   },
   {
     "@context": "https://schema.org",
@@ -56,7 +49,7 @@ const structuredData = [
       {
         "@type": "ListItem",
         position: 1,
-        name: "Inicio",
+        name: "Início",
         item: new URL("/", siteUrl).href,
       },
       {
@@ -98,7 +91,7 @@ const structuredData = [
     ...post.data.tags,
     "como escrever contos",
     "escrita criativa",
-    "tecnicas narrativas",
+    "técnicas narrativas",
   ]}
   structuredData={structuredData}
 >
@@ -149,7 +142,7 @@ const structuredData = [
         <ul>
           {related.map(r => (
             <li>
-              <a class="rel-row" href={`/${r.id}`}>
+              <a class="rel-row" href={`/${r.id}/`}>
                 <h4>{r.data.title}</h4>
                 <p>{r.data.description}</p>
                 <span class="rel-cta">ler →</span>

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_DESCRIPTION, SITE_NAME, organizationSchema } from "../lib/site";
 import { descriptionFromTag, slugifyTag, titleFromTag } from "../lib/trilhas";
 
 const allPosts = await getCollection("posts");
@@ -14,7 +15,12 @@ const startPosts = sorted.slice(0, 3);
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 
 const featBody = (featured.body || "").trim();
-const featParas = featBody.split(/\n\s*\n/).slice(0, 2);
+const featParas = featBody
+  .replace(/^#\s+.+(?:\n|$)/, "")
+  .trim()
+  .split(/\n\s*\n/)
+  .slice(0, 2);
+const featuredReadMin = Math.max(1, Math.ceil(featBody.split(/\s+/).length / 220));
 
 const tagCounts = new Map<string, number>();
 for (const post of sorted) {
@@ -28,7 +34,7 @@ const tracks = [...tagCounts.entries()]
     tag,
     slug: slugifyTag(tag),
     title: titleFromTag(tag),
-    kicker: "tag",
+    kicker: "trilha",
     description: descriptionFromTag(tag),
     count,
   }));
@@ -41,30 +47,26 @@ function fmtShort(d: Date) {
 }
 ---
 <BaseLayout
-  title="Oficina de Contos"
-  description="Guias editoriais, tecnicas e exercicios praticos para escrever contos com mais clareza, tensao e estilo."
+  title={SITE_NAME}
+  description={SITE_DESCRIPTION}
   keywords={[
     "como escrever contos",
     "escrita criativa",
-    "tecnicas de escrita",
+    "técnicas de escrita",
     "oficina de contos",
     "estrutura de conto",
     "personagens",
-    "revisao de texto",
+    "revisão de texto",
   ]}
   structuredData={[
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: "Oficina de Contos",
+      name: SITE_NAME,
       url: new URL("/", siteUrl).href,
       inLanguage: "pt-BR",
-      description: "Guias editoriais, tecnicas e exercicios praticos para escrever contos com mais clareza, tensao e estilo.",
-      publisher: {
-        "@type": "Organization",
-        name: "Meus Contos Eroticos",
-        url: new URL("/", siteUrl).href,
-      },
+      description: SITE_DESCRIPTION,
+      publisher: organizationSchema(siteUrl),
     },
     {
       "@context": "https://schema.org",
@@ -86,7 +88,7 @@ function fmtShort(d: Date) {
       <div class="mast-copy">
         <span class="eyebrow-text">guia editorial</span>
         <h1 class="mast-title">
-          Aprenda a escrever <em>contos</em> com metodo e voz.
+          Aprenda a escrever <em>contos</em> com método e voz.
         </h1>
       </div>
       <p class="mast-dek">
@@ -96,9 +98,9 @@ function fmtShort(d: Date) {
 
     <section class="front-grid" aria-label="Destaques editoriais">
       <article class="hero">
-        <a href={`/${featured.id}`} class="hero-anchor" aria-label={`Ler ${featured.data.title}`}></a>
+        <a href={`/${featured.id}/`} class="hero-anchor" aria-label={`Ler ${featured.data.title}`}></a>
         <div class="hero-meta">
-          <span class="hero-num">aula 01</span>
+          <span class="hero-num">destaque</span>
           <span class="hero-divider"></span>
           <time datetime={featured.data.publishedAt.toISOString()}>{fmt(featured.data.publishedAt)}</time>
         </div>
@@ -112,7 +114,7 @@ function fmtShort(d: Date) {
         <div class="hero-foot">
           <span class="hero-cta">Continuar lendo</span>
           <span class="hero-rule"></span>
-          <span class="hero-time">5 min</span>
+          <span class="hero-time">{featuredReadMin} min</span>
         </div>
       </article>
 
@@ -134,7 +136,7 @@ function fmtShort(d: Date) {
     <section class="tracks" id="trilhas" aria-labelledby="tracks-title">
       <div class="section-head">
         <span class="section-kicker">trilhas</span>
-        <h2 id="tracks-title">Oficina por tecnica</h2>
+        <h2 id="tracks-title">Oficina por técnica</h2>
       </div>
       <div class="track-grid">
         {tracks.map((track) => (
@@ -142,7 +144,7 @@ function fmtShort(d: Date) {
             <span>{track.kicker}</span>
             <h3>{track.title}</h3>
             <p>{track.description}</p>
-            <small>{track.count} {track.count === 1 ? "conto" : "contos"}</small>
+            <small>{track.count} {track.count === 1 ? "post" : "posts"}</small>
           </a>
         ))}
       </div>
@@ -152,13 +154,13 @@ function fmtShort(d: Date) {
       <header class="arch-head">
         <span class="arch-label">arquivo</span>
         <h2 id="archive-title" class="arch-title">Leituras <em>recentes</em></h2>
-        <span class="arch-count">{rest.length} contos</span>
+        <span class="arch-count">{rest.length} {rest.length === 1 ? "post" : "posts"}</span>
       </header>
 
       <ol class="arch-list">
         {latest.map((post, i) => (
           <li class="arch-item">
-            <a class="arch-row" href={`/${post.id}`}>
+            <a class="arch-row" href={`/${post.id}/`}>
               <span class="arch-num">{String(i + 2).padStart(2, "0")}</span>
               <div class="arch-body">
                 <h3 class="arch-h3">{post.data.title}</h3>
@@ -218,12 +220,13 @@ function fmtShort(d: Date) {
   .mast-title {
     font-family: var(--font-serif);
     font-weight: 500;
-    font-size: clamp(48px, 8vw, 104px);
-    line-height: 0.96;
+    font-size: clamp(46px, 7.2vw, 92px);
+    line-height: 1.02;
     letter-spacing: 0;
     color: var(--deep);
     margin: 0;
-    max-width: 10ch;
+    max-width: 11ch;
+    text-rendering: optimizeLegibility;
   }
   .mast-title em { font-style: italic; color: var(--primary-strong); }
 
@@ -284,11 +287,12 @@ function fmtShort(d: Date) {
     font-family: var(--font-serif);
     font-weight: 500;
     font-size: clamp(36px, 5vw, 64px);
-    line-height: 1.03;
+    line-height: 1.08;
     letter-spacing: 0;
     color: var(--deep);
     margin: 0 0 22px;
     transition: color .2s;
+    text-rendering: optimizeLegibility;
   }
   .hero:hover .hero-title { color: var(--primary-strong); }
 

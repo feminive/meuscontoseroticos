@@ -1,4 +1,6 @@
 ---
+import { SITE_NAME } from "../lib/site";
+
 interface Props {
   title: string;
   description: string;
@@ -23,7 +25,7 @@ const {
   structuredData,
   noindex = false,
 } = Astro.props;
-const siteName = "Oficina de Contos";
+const siteName = SITE_NAME;
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 const canonical = canonicalURL ?? new URL(Astro.url.pathname, siteUrl).href;
@@ -170,12 +172,24 @@ const jsonLd = structuredData
       border:none;
       cursor:pointer;
       color:var(--ink-50);
-      font-size:18px;
-      padding:4px 8px;
-      line-height:1;
+      width:42px;
+      height:42px;
+      padding:8px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       transition:color .2s;
     }
     .theme-btn:hover{color:var(--deep)}
+    .theme-btn svg{
+      width:26px;
+      height:26px;
+      stroke:currentColor;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      fill:none;
+    }
 
     /* ── Footer ── */
     .site-footer{
@@ -212,7 +226,7 @@ const jsonLd = structuredData
       <a class="top-link" href="/">Arquivo</a>
       <a class="top-link" href="/#trilhas">Trilhas</a>
       <button class="theme-btn" id="theme-toggle" aria-label="Alternar tema">
-        <span id="theme-icon">☀</span>
+        <span id="theme-icon" aria-hidden="true"></span>
       </button>
     </div>
   </header>
@@ -221,15 +235,17 @@ const jsonLd = structuredData
 
   <footer class="site-footer">
     <a class="fb" href="/">oficina<span class="dot">.</span></a>
-    <span>ensaios, tecnicas e exercicios para escrever contos</span>
+    <span>ensaios, técnicas e exercícios para escrever contos</span>
   </footer>
 
   <script>
     const btn=document.getElementById("theme-toggle");
     const icon=document.getElementById("theme-icon");
+    const sun='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>';
+    const moon='<svg viewBox="0 0 24 24"><path d="M20 14.2A7.8 7.8 0 0 1 9.8 4 8.6 8.6 0 1 0 20 14.2Z"></path></svg>';
     function sync(){
       const d=document.documentElement.getAttribute("data-theme")==="dark";
-      if(icon)icon.textContent=d?"☾":"☀";
+      if(icon)icon.innerHTML=d?moon:sun;
     }
     sync();
     btn?.addEventListener("click",()=>{

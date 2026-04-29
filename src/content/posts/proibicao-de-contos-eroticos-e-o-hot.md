@@ -63,3 +63,9 @@ Essa mudança de nomenclatura não é apenas uma estratégia de mercado, mas tam
 ## O Erotismo Ainda é Tabu
 
 A necessidade de renomear a literatura erótica mostra que, apesar dos avanços, a sociedade ainda se sente desconfortável com a sexualidade explícita. No fundo, a mudança de nome é um disfarce conveniente para evitar a censura velada e o preconceito que sempre existiu. Mas será que o desejo humano precisa realmente de um eufemismo para ser aceito?
+
+## Referências
+
+- [Memórias da Ditadura: censura prévia aos livros](https://memoriasdaditadura.org.br/censura-previa-aos-livros/)
+- [Memórias da Ditadura: políticas da moral e bons costumes contra LGBTs durante a ditadura](https://memoriasdaditadura.org.br/as-politicas-da-moral-e-bons-costumes-contra-lgbts-durante-a-ditadura/)
+- [PEN International: attempted censorship of _Cometierra_](https://www.pen-international.org/news/argentina-pen-international-condemns-attempted-censorship-of-the-book-cometierranbsp)

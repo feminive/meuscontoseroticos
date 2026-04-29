@@ -1,6 +1,6 @@
 ---
-title: "10 verdades sobre contos eróticos que ninguém conta"
-description: "Descrição curta do primeiro texto, em uma linha."
+title: "10 verdades sobre blogs eróticos que ninguém conta"
+description: "Entenda os bastidores de manter um blog de contos eróticos: dinheiro, anonimato, nichos, IA, SEO e os riscos práticos de publicar conteúdo adulto."
 publishedAt: 2025-04-21
 tags: universo
 featured: true

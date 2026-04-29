@@ -1,7 +1,8 @@
 import { getCollection } from "astro:content";
+import { SITE_DESCRIPTION, SITE_NAME } from "../lib/site";
 
-const siteTitle = "Oficina de Contos";
-const siteDescription = "Guias editoriais, tecnicas e exercicios praticos para escrever contos.";
+const siteTitle = SITE_NAME;
+const siteDescription = SITE_DESCRIPTION;
 
 function escapeXml(value: string) {
   return value

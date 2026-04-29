@@ -61,3 +61,8 @@ Comece por _A Volúpia do Pecado_ e _Eudemônia_; em seguida, leia _Eu Sou Uma L
 ## As obras estão disponíveis?
 
 Há reedições pontuais e acervos em sebos e bibliotecas. O interesse crítico recente vem impulsionando novas edições.
+
+## Referências
+
+- [Memórias da Ditadura: políticas da moral e bons costumes contra LGBTs durante a ditadura](https://memoriasdaditadura.org.br/as-politicas-da-moral-e-bons-costumes-contra-lgbts-durante-a-ditadura/)
+- [Memórias da Ditadura: censura prévia aos livros](https://memoriasdaditadura.org.br/censura-previa-aos-livros/)

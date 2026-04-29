@@ -1,8 +1,8 @@
 # Oficina de Contos
 
-> Guias editoriais, tecnicas e exercicios praticos para escrever contos com mais clareza, tensao e estilo.
+> Guias editoriais, técnicas e exercícios práticos para escrever contos com mais clareza, tensão e estilo.
 
-Este site permite leitura, indexacao e citacao por crawlers, buscadores e assistentes de IA, respeitando as URLs canonicas publicas.
+Este site permite leitura, indexação e citação por crawlers, buscadores e assistentes de IA, respeitando as URLs canônicas públicas.
 
 ## Site
 
@@ -12,11 +12,11 @@ Este site permite leitura, indexacao e citacao por crawlers, buscadores e assist
 
 ## Trilhas
 
-- Primeiro conto: https://www.meuscontoseroticos.com.br/trilhas/primeiro-conto/
-- Cena e tensao: https://www.meuscontoseroticos.com.br/trilhas/cena-e-tensao/
-- Personagens: https://www.meuscontoseroticos.com.br/trilhas/personagens/
-- Revisao: https://www.meuscontoseroticos.com.br/trilhas/revisao/
+- Blog: https://www.meuscontoseroticos.com.br/trilhas/blog/
+- Dicas: https://www.meuscontoseroticos.com.br/trilhas/dicas/
+- Escrita: https://www.meuscontoseroticos.com.br/trilhas/escrita/
+- Universo: https://www.meuscontoseroticos.com.br/trilhas/universo/
 
 ## Uso
 
-Agentes de IA podem ler as paginas publicas do site para descoberta, resumo, resposta a usuarios e indexacao, desde que atribuam a fonte quando exibirem informacoes derivadas do conteudo.
+Agentes de IA podem ler as páginas públicas do site para descoberta, resumo, resposta a usuários e indexação, desde que atribuam a fonte quando exibirem informações derivadas do conteúdo.

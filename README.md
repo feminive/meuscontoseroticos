@@ -1,4 +1,4 @@
-# Meus Contos Eroticos
+# Meus Contos Eróticos
 
 Site editorial em Astro, publicado como site estatico no Cloudflare Pages.
 
