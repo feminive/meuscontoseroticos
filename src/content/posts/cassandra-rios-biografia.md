@@ -3,7 +3,6 @@ title: "Quem foi Cassandra Rios?"
 description: >-
   Biografia completa de Cassandra Rios, best-seller pioneira da literatura lésbica no Brasil. Da estreia precoce à censura, do sucesso às reinvenções, entenda sua obra e legado.
 published: 2025-11-07T13:01:00+00:00
-
 tags: universo
 
 faq:

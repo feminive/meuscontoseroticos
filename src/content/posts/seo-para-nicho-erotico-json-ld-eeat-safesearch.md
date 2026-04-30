@@ -3,7 +3,7 @@ title: "SEO para nicho erótico: JSON-LD, E-E-A-T, breadcrumbs e SafeSearch"
 description: >-
   Aprenda como estruturar SEO para sites de literatura erótica sem confundir páginas editoriais com conteúdo explícito: hierarquia, JSON-LD, breadcrumbs, E-E-A-T, SafeSearch e arquitetura interna.
 published: 2026-04-29T03:45:00-03:00
-tags: escrita, dicas, universo
+tags: dicas
 faq:
   - question: "Todo site erótico precisa usar meta rating adult?"
     answer: "Não. A marcação adult deve ser usada em páginas com conteúdo sexualmente explícito. Páginas editoriais, educativas ou críticas sobre literatura erótica devem ser descritas com precisão, sem se declarar adultas se não exibem conteúdo explícito."

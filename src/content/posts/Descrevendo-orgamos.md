@@ -3,8 +3,7 @@ title: "Como descrever um orgasmo em texto erótico com exemplos"
 description: >-
   Explore exercícios poéticos de escrita erótica que capturam o êxtase como tempestades cósmicas e fusões sensoriais intensas, misturando delicadeza e violência em metáforas naturais para narrar o prazer feminino com profundidade lírica.
 published: 2025-02-05T00:00:00+00:00
-chapter: 6
-tags: blog, dicas
+tags: escrita
 image: >-
   https://9levcteld3j6zieu.public.blob.vercel-storage.com/orgasmos.webp
 faq:

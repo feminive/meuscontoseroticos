@@ -4,7 +4,7 @@ description: >-
   Entenda como organizar desejo, tensão, obstáculo, clímax e consequência em contos eróticos, usando estrutura narrativa sem transformar o texto em fórmula.
 published: 2025-02-07T00:00:00+00:00
 chapter: 7
-tags: escrita, dicas
+tags: escrita
 image: >-
   https://9levcteld3j6zieu.public.blob.vercel-storage.com/proibido.webp
 faq:
