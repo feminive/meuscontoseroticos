@@ -29,7 +29,7 @@ const siteName = SITE_NAME;
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 const canonical = canonicalURL ?? new URL(Astro.url.pathname, siteUrl).href;
-const ogImage = new URL(image ?? "/opengraph.webp", siteUrl).href;
+const ogImage = new URL(image ?? "/oficina.jpg", siteUrl).href;
 const jsonLd = structuredData
   ? JSON.stringify(structuredData).replace(/</g, "\\u003c")
   : undefined;
@@ -241,8 +241,8 @@ const jsonLd = structuredData
   <script>
     const btn=document.getElementById("theme-toggle");
     const icon=document.getElementById("theme-icon");
-    const sun='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>';
-    const moon='<svg viewBox="0 0 24 24"><path d="M20 14.2A7.8 7.8 0 0 1 9.8 4 8.6 8.6 0 1 0 20 14.2Z"></path></svg>';
+    const sun='<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>';
+    const moon='<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A7.8 7.8 0 0 1 9.8 4 8.6 8.6 0 1 0 20 14.2Z"></path></svg>';
     function sync(){
       const d=document.documentElement.getAttribute("data-theme")==="dark";
       if(icon)icon.innerHTML=d?moon:sun;

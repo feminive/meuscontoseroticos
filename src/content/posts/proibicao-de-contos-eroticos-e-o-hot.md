@@ -4,7 +4,7 @@ description: >-
   Descubra a história da literatura erótica, marcada por censura e repressão desde o Código Comstock até a ditadura brasileira e a era digital, revelando por que o desejo ainda se camufla em termos como 'hot' para sobreviver ao tabu social.
 published: 2025-02-07T00:00:00+00:00
 chapter: 7
-tags: blog, dicas
+tags: universo
 image: >-
   https://9levcteld3j6zieu.public.blob.vercel-storage.com/proibido.webp
 faq:
