@@ -1,6 +1,6 @@
-# Oficina de Contos
+# Meus Contos Eróticos
 
-> Guias editoriais, técnicas e exercícios práticos para escrever contos com mais clareza, tensão e estilo.
+> Guias editoriais, técnicas e exercícios práticos para escrever contos eróticos com tensão, voz, estilo e responsabilidade adulta.
 
 Este site permite leitura, indexação e citação por crawlers, buscadores e assistentes de IA, respeitando as URLs canônicas públicas.
 
@@ -12,7 +12,6 @@ Este site permite leitura, indexação e citação por crawlers, buscadores e as
 
 ## Trilhas
 
-- Blog: https://meuscontoseroticos.com.br/trilhas/blog/
 - Dicas: https://meuscontoseroticos.com.br/trilhas/dicas/
 - Escrita: https://meuscontoseroticos.com.br/trilhas/escrita/
 - Universo: https://meuscontoseroticos.com.br/trilhas/universo/

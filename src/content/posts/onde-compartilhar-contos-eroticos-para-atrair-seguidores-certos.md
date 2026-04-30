@@ -14,7 +14,7 @@ faq:
 ---
 
 
-# Onde compartilhar contos eróticos para atrair seguidores certos
+## Onde compartilhar contos eróticos para atrair seguidores certos
 
 ## O que público qualificado significa aqui
 

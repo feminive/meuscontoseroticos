@@ -1,3 +1,5 @@
+export const MIN_TRACK_POSTS = 2;
+
 export function slugifyTag(tag: string) {
   return tag
     .normalize("NFD")
@@ -17,9 +19,9 @@ export function titleFromTag(tag: string) {
 
 export function descriptionFromTag(tag: string) {
   const descriptions: Record<string, string> = {
-    escrita: "Como escrever contos com mais estrutura, cena, personagem, tensão, estilo e revisão.",
-    dicas: "Como construir e manter um site: domínio, SEO, categorias, publicação e ferramentas.",
-    blog: "Opiniões, bastidores, reflexões, atualizações e ideias livres sobre escrita e publicação.",
+    escrita: "Como escrever contos eróticos com mais estrutura, cena, personagem, tensão, estilo e revisão.",
+    dicas: "Como construir e manter um site adulto: domínio, SEO, categorias, publicação e ferramentas.",
+    blog: "Opiniões, bastidores, reflexões, atualizações e ideias livres sobre escrita erótica e publicação.",
     universo: "Autores, mercado, plataformas, censura, tendências e contexto da literatura erótica.",
   };
 

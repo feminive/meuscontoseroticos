@@ -17,7 +17,7 @@ faq:
     answer: "Não. É crime. Além da questão moral e legal, a publicação desse tipo de conteúdo resulta em denúncias e exclusão imediata das plataformas e mecanismos de busca."
 ---
 
-# O que ninguém te conta sobre ter um blog de contos eróticos
+## O que ninguém te conta sobre ter um blog de contos eróticos
 
 Este site é mantido por duas pessoas e está ativo neste endereço há dois anos. Antes da estabilização, transitamos por diversas plataformas, enfrentando limitações técnicas e editoriais, até optarmos pela criação de um ambiente próprio.
 

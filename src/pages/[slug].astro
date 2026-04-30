@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { organizationSchema } from "../lib/site";
+import { DEFAULT_OG_IMAGE, authorSchema, organizationSchema } from "../lib/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -22,6 +22,7 @@ const readMin = Math.max(1, Math.ceil(wordCount / 220));
 
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(`/${post.id}/`, siteUrl).href;
+const schemaImage = new URL(DEFAULT_OG_IMAGE, siteUrl).href;
 const shareUrl = encodeURIComponent(decodeURI(canonicalUrl));
 const shareText = encodeURIComponent(post.data.title);
 const primaryTag = post.data.tags[0];
@@ -34,12 +35,13 @@ const structuredData = [
     description: post.data.description,
     url: canonicalUrl,
     mainEntityOfPage: canonicalUrl,
+    image: schemaImage,
     datePublished: post.data.publishedAt.toISOString(),
     dateModified: (post.data.updatedAt ?? post.data.publishedAt).toISOString(),
     inLanguage: "pt-BR",
     keywords: post.data.tags.join(", "),
     articleSection: primaryTag,
-    author: organizationSchema(siteUrl),
+    author: authorSchema(siteUrl),
     publisher: organizationSchema(siteUrl),
   },
   {
@@ -89,7 +91,9 @@ const structuredData = [
   keywords={[
     post.data.title,
     ...post.data.tags,
-    "como escrever contos",
+    "como escrever contos eróticos",
+    "contos eróticos",
+    "escrita erótica",
     "escrita criativa",
     "técnicas narrativas",
   ]}

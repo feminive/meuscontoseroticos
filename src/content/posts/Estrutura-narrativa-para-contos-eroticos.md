@@ -3,10 +3,8 @@ title: "Estrutura narrativa para contos eróticos"
 description: >-
   Entenda como organizar desejo, tensão, obstáculo, clímax e consequência em contos eróticos, usando estrutura narrativa sem transformar o texto em fórmula.
 published: 2025-02-07T00:00:00+00:00
-chapter: 7
+
 tags: escrita
-image: >-
-  https://9levcteld3j6zieu.public.blob.vercel-storage.com/proibido.webp
 faq:
   - question: "O que é estrutura narrativa em um conto erótico?"
     answer: "É a organização dos acontecimentos para que o desejo avance com tensão, obstáculo, ponto de virada, clímax narrativo e consequência. A estrutura impede que o conto vire apenas uma sequência de cenas sensuais sem progressão."
@@ -19,7 +17,7 @@ faq:
 
 ---
 
-# Estrutura narrativa para contos eróticos: como organizar desejo, tensão e consequência
+## Estrutura narrativa para contos eróticos: como organizar desejo, tensão e consequência
 
 
 ## O que é estrutura narrativa
@@ -58,7 +56,7 @@ Esse mapa evita que o conto fique confuso, repetitivo ou sem progressão.
 ---
 Eu vou listar aqui algumas estruturas narrativas e vou começar pela mais fácil na minha opinião, que serve tanto para grandes histórias como para pequenos contos. 
 
-# 1. Estrutura linear
+## 1. Estrutura linear
 
 A estrutura linear conta os acontecimentos em ordem cronológica.
 
@@ -86,7 +84,7 @@ O erro comum é correr direto para o ponto mais intenso. Em conto erótico, a fo
 
 ---
 
-# 2. Estrutura de três atos
+## 2. Estrutura de três atos
 
 A estrutura de três atos divide o conto em apresentação, confronto e resolução.  Em conto curto, esses atos precisam ser condensados. Nada de longas explicações. Você não precisa falar de todas inseguranças de uma mulher para narrar a primeira relação lésbica dela.
 
@@ -134,7 +132,7 @@ O que essa personagem entende agora que não entendia no início?
 
 ---
 
-# 3. In media res
+## 3. In media res
 
 *In media res* significa começar no meio da ação.
 
@@ -172,7 +170,7 @@ O que está em risco.
 
 ---
 
-# 4. Estrutura circular
+## 4. Estrutura circular
 
 Na estrutura circular, o final retorna ao início, mas com outro sentido.
 
@@ -198,7 +196,7 @@ Use quando quiser que o final produza eco no início.
 
 ---
 
-# 5. Estrutura episódica curta
+## 5. Estrutura episódica curta
 
 A estrutura episódica curta organiza o conto em blocos de cena.
 
@@ -235,7 +233,7 @@ Eu só recomendo esse modelo quando você estiver escrevendo contos em sequênci
 
 ---
 
-# 6. Estrutura de clímax único
+## 6. Estrutura de clímax único
 
 Essa é uma das estruturas mais fortes para contos.
 
@@ -271,7 +269,7 @@ O fechamento deve ser curto. Depois do ponto máximo, não explique demais. Most
 
 ---
 
-# 7. Estrutura reversa
+## 7. Estrutura reversa
 
 Na estrutura reversa, o conto começa pelo depois.
 
@@ -308,7 +306,7 @@ Qual foi a decisão que causou essa consequência?
 
 ---
 
-# 8. Estrutura fragmentada
+## 8. Estrutura fragmentada
 
 A estrutura fragmentada quebra a ordem cronológica.
 
@@ -347,7 +345,7 @@ O que muda.
 
 ---
 
-# 9. Estrutura de revelação
+## 9. Estrutura de revelação
 
 A estrutura de revelação esconde uma informação importante e a entrega no momento certo.
 
@@ -386,7 +384,7 @@ Em breve eu vou escrever mais sobre isso, eu acho que essa narrativa é ótima.
 
 ---
 
-# 10. Estrutura minimalista
+## 10. Estrutura minimalista
 
 A estrutura minimalista reduz o conto a um único momento decisivo.
 
@@ -424,7 +422,7 @@ Se nada mudou, não há conto. Há apenas cena.
 
 ---
 
-# Como escolher a melhor estrutura
+## Como escolher a melhor estrutura
 
 | Objetivo do conto                      | Melhor estrutura |
 | -------------------------------------- | ---------------- |
@@ -441,7 +439,7 @@ Se nada mudou, não há conto. Há apenas cena.
 
 ---
 
-# Modelo prático para estruturar um conto erótico
+## Modelo prático para estruturar um conto erótico
 
 Use este esquema antes de escrever:
 
@@ -473,7 +471,7 @@ O que fica diferente depois?
 
 ---
 
-# Exemplo de estrutura simples
+## Exemplo de estrutura simples
 
 ```md
 Título provisório:
@@ -509,7 +507,7 @@ A relação entre os dois muda, mesmo que nada seja explicado em excesso.
 
 ---
 
-# Conclusão
+## Conclusão
 
 Estrutura narrativa é lógica de progressão.
 

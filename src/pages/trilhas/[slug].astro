@@ -2,11 +2,19 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { SITE_NAME, organizationSchema } from "../../lib/site";
-import { descriptionFromTag, slugifyTag, titleFromTag } from "../../lib/trilhas";
+import { MIN_TRACK_POSTS, descriptionFromTag, slugifyTag, titleFromTag } from "../../lib/trilhas";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
-  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  const tagCounts = new Map<string, number>();
+  for (const post of posts) {
+    for (const tag of post.data.tags) {
+      tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+    }
+  }
+  const tags = [...tagCounts.entries()]
+    .filter(([, count]) => count >= MIN_TRACK_POSTS)
+    .map(([tag]) => tag);
 
   return tags.map((tag) => ({
     params: { slug: slugifyTag(tag) },
@@ -47,11 +55,13 @@ function fmt(d: Date) {
   title={trilha.title}
   description={trilha.description}
   canonicalURL={canonicalUrl}
-  noindex={posts.length < 2}
+  noindex={posts.length < MIN_TRACK_POSTS}
   keywords={[
     trilha.title,
     trilha.tag,
-    "como escrever contos",
+    "como escrever contos eróticos",
+    "contos eróticos",
+    "escrita erótica",
     "escrita criativa",
     "oficina de escrita",
     "técnicas narrativas",
@@ -60,7 +70,7 @@ function fmt(d: Date) {
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      name: `${trilha.title} — Oficina de Contos`,
+      name: `${trilha.title} — ${SITE_NAME}`,
       description: trilha.description,
       url: canonicalUrl,
       inLanguage: "pt-BR",

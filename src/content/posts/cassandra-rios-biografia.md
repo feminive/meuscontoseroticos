@@ -14,7 +14,7 @@ faq:
     answer: "Os marcos iniciais recomendados são 'A Volúpia do Pecado', seu primeiro sucesso, e 'Eudemônia', que confronta a patologização da homossexualidade."
 ---
 
-# Cassandra Rios: biografia extensa
+## Cassandra Rios: biografia extensa
 
 Cassandra Rios, nome literário de Odette Pérez Ríos (São Paulo, 1932–2002), foi a escritora que levou o desejo lésbico ao centro do romance popular brasileiro. Best-seller absoluta nos anos 1960–70, tornou-se a autora mais censurada da ditadura militar: 33 de seus 36 livros foram proibidos por "atentado à moral".
 

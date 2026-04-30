@@ -4,8 +4,7 @@ description: >-
   A autora de centenas de contos eróticos ensina as 10 regras que ela mesma usa. Tem dica sobre nomes, ritmo, tensão e o erro que quase todo mundo comete na cena principal.
 published: 2025-02-14T18:21:00+00:00
 tags: escrita
-image: >-
-  https://9levcteld3j6zieu.public.blob.vercel-storage.com/pimenta.webp
+
 faq:
   - question: "Qual a diferença entre erotismo e pornografia?"
     answer: "Segundo a autora, contos eróticos são tecnicamente pornografia, mas a diferença está no nível de abordagem, tensão e desenvolvimento da cena, indo além da mecânica do ato sexual."

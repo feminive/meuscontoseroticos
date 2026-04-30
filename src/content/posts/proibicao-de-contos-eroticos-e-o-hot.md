@@ -3,10 +3,9 @@ title: "Repressão aos Contos Eróticos e o disfarce do \"Hot\""
 description: >-
   Descubra a história da literatura erótica, marcada por censura e repressão desde o Código Comstock até a ditadura brasileira e a era digital, revelando por que o desejo ainda se camufla em termos como 'hot' para sobreviver ao tabu social.
 published: 2025-02-07T00:00:00+00:00
-chapter: 7
+
 tags: universo
-image: >-
-  https://9levcteld3j6zieu.public.blob.vercel-storage.com/proibido.webp
+
 faq:
   - question: "Por que o termo 'Hot' é usado para descrever literatura erótica?"
     answer: "O termo 'Hot' surgiu como uma estratégia comercial e de camuflagem para evitar o julgamento moral e a censura velada que o termo 'erótico' ainda carrega na sociedade contemporânea."

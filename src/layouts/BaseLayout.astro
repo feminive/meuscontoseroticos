@@ -1,5 +1,5 @@
 ---
-import { SITE_NAME } from "../lib/site";
+import { DEFAULT_OG_IMAGE, SITE_NAME } from "../lib/site";
 
 interface Props {
   title: string;
@@ -29,7 +29,7 @@ const siteName = SITE_NAME;
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 const canonical = canonicalURL ?? new URL(Astro.url.pathname, siteUrl).href;
-const ogImage = new URL(image ?? "/oficina.jpg", siteUrl).href;
+const ogImage = new URL(image ?? DEFAULT_OG_IMAGE, siteUrl).href;
 const jsonLd = structuredData
   ? JSON.stringify(structuredData).replace(/</g, "\\u003c")
   : undefined;
@@ -235,7 +235,7 @@ const jsonLd = structuredData
 
   <footer class="site-footer">
     <a class="fb" href="/">oficina<span class="dot">.</span></a>
-    <span>ensaios, técnicas e exercícios para escrever contos</span>
+    <span>ensaios, técnicas e exercícios para escrever contos eróticos</span>
   </footer>
 
   <script>

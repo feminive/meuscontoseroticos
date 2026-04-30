@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE_DESCRIPTION, SITE_NAME, organizationSchema } from "../lib/site";
-import { descriptionFromTag, slugifyTag, titleFromTag } from "../lib/trilhas";
+import { MIN_TRACK_POSTS, descriptionFromTag, slugifyTag, titleFromTag } from "../lib/trilhas";
 
 const allPosts = await getCollection("posts");
 const sorted = allPosts.sort(
@@ -16,9 +16,10 @@ const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 
 const featBody = (featured.body || "").trim();
 const featParas = featBody
-  .replace(/^#\s+.+(?:\n|$)/, "")
+  .replace(/^#{1,6}\s+.+(?:\n|$)/, "")
   .trim()
   .split(/\n\s*\n/)
+  .filter((p) => !/^#{1,6}\s+/.test(p))
   .slice(0, 2);
 const featuredReadMin = Math.max(1, Math.ceil(featBody.split(/\s+/).length / 220));
 
@@ -29,6 +30,7 @@ for (const post of sorted) {
   }
 }
 const tracks = [...tagCounts.entries()]
+  .filter(([, count]) => count >= MIN_TRACK_POSTS)
   .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "pt-BR"))
   .map(([tag, count]) => ({
     tag,
@@ -51,9 +53,12 @@ function fmtShort(d: Date) {
   description={SITE_DESCRIPTION}
   keywords={[
     "como escrever contos",
+    "como escrever contos eróticos",
+    "contos eróticos",
+    "escrita erótica",
     "escrita criativa",
     "técnicas de escrita",
-    "oficina de contos",
+    "oficina de contos eróticos",
     "estrutura de conto",
     "personagens",
     "revisão de texto",
@@ -71,7 +76,7 @@ function fmtShort(d: Date) {
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      name: "Trilhas de escrita criativa",
+      name: "Trilhas de escrita erótica",
       itemListElement: tracks.map((track, index) => ({
         "@type": "ListItem",
         position: index + 1,
@@ -88,11 +93,11 @@ function fmtShort(d: Date) {
       <div class="mast-copy">
         <span class="eyebrow-text">guia editorial</span>
         <h1 class="mast-title">
-          Aprenda a escrever <em>contos</em> com método e voz.
+          Aprenda a escrever <em>contos eróticos</em> com método e voz.
         </h1>
       </div>
       <p class="mast-dek">
-        Uma revista-oficina para transformar ideias soltas em cenas, personagens, finais e textos revisados.
+        Uma revista-oficina para transformar desejo, tensão e personagem em narrativas adultas bem escritas.
       </p>
     </section>
 
