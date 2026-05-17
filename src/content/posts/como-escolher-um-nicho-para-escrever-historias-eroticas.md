@@ -2,13 +2,13 @@
 title: "Como escolher um nicho para escrever histórias eróticas"
 description: >-
   Entenda como escolher um nicho na escrita erótica, evitar a frustração de competir com temas muito disputados e construir aos poucos um público fiel, engajado e interessado no seu estilo.
-published: 2025-02-05T00:00:00+00:00
+published: 2026-05-17T00:00:00-03:00
 tags: "escrita erótica, autoras, nichos, criatividade, comunidade"
 category: "Escrita"
 slug: "como-escolher-nicho-escrita-erotica"
 excerpt: "Aprenda por que escolher um nicho específico pode ajudar autoras iniciantes a crescerem com mais confiança, consistência e engajamento."
 readingTime: "3 min"
-featured: false
+featured: true
 
 faq:
   - question: "Como escolher um nicho para escrever histórias eróticas?"
