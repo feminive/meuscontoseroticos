@@ -1,34 +1,23 @@
 ---
-  title: "Como escolher um nicho para escrever histórias eróticas"
-  description: >-
-    Entenda como escolher um nicho na escrita erótica, evitar a frustração de competir com temas muito disputados e
-  construir aos poucos um público fiel, engajado e interessado no seu estilo.
-  published: 2025-02-05T00:00:00+00:00
-  tags:
-    - escrita erótica
-    - autoras
-    - nichos
-    - criatividade
-    - comunidade
+title: "Como escolher um nicho para escrever histórias eróticas"
+description: >-
+  Entenda como escolher um nicho na escrita erótica, evitar a frustração de competir com temas muito disputados e construir aos poucos um público fiel, engajado e interessado no seu estilo.
+published: 2025-02-05T00:00:00+00:00
+tags: "escrita erótica, autoras, nichos, criatividade, comunidade"
+category: "Escrita"
+slug: "como-escolher-nicho-escrita-erotica"
+excerpt: "Aprenda por que escolher um nicho específico pode ajudar autoras iniciantes a crescerem com mais confiança, consistência e engajamento."
+readingTime: "3 min"
+featured: false
 
-  category: "Escrita"
-  slug: "como-escolher-nicho-escrita-erotica"
-  excerpt: "Aprenda por que escolher um nicho específico pode ajudar autoras iniciantes a crescerem com mais confiança,
-  consistência e engajamento."
-  readingTime: "3 min"
-  featured: false
-
-  faq:
-    - question: "Como escolher um nicho para escrever histórias eróticas?"
-      answer: "Comece pelos temas que você gosta de escrever e nos quais se sente confortável. Depois, observe se existe
-  uma comunidade interessada nesse tipo de conteúdo e como ela costuma interagir com autoras iniciantes."
-    - question: "Vale a pena escrever sobre os temas eróticos mais populares?"
-      answer: "Pode valer, mas para quem está começando, competir diretamente com temas muito disputados pode ser
-  frustrante. Nichos menores costumam oferecer mais espaço para crescimento, aprendizado e construção de público."
-    - question: "Como ganhar reconhecimento escrevendo conteúdo erótico?"
-      answer: "Publique com consistência, desenvolva uma voz própria, participe de comunidades do seu nicho e preste
-  atenção ao engajamento real das leitoras e leitores, não apenas ao número de visualizações."
-  ---
+faq:
+  - question: "Como escolher um nicho para escrever histórias eróticas?"
+    answer: "Comece pelos temas que você gosta de escrever e nos quais se sente confortável. Depois, observe se existe uma comunidade interessada nesse tipo de conteúdo e como ela costuma interagir com autoras iniciantes."
+  - question: "Vale a pena escrever sobre os temas eróticos mais populares?"
+    answer: "Pode valer, mas para quem está começando, competir diretamente com temas muito disputados pode ser frustrante. Nichos menores costumam oferecer mais espaço para crescimento, aprendizado e construção de público."
+  - question: "Como ganhar reconhecimento escrevendo conteúdo erótico?"
+    answer: "Publique com consistência, desenvolva uma voz própria, participe de comunidades do seu nicho e preste atenção ao engajamento real das leitoras e leitores, não apenas ao número de visualizações."
+---
 
   Você é uma pessoa criativa. Consegue escrever sobre muitos temas, imaginar cenas, criar personagens e transformar desejo em narrativa. Mas, se quer crescer como autora e ser lida com mais atenção, uma pergunta inevitável aparece:
   sobre o que escrever para ser reconhecida?
