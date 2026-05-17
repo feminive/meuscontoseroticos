@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Divisão com Reserva</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    .box {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #111;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .resultado {
+      margin-top: 24px;
+      background: #eee;
+      padding: 16px;
+      border-radius: 8px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Divisão com Reserva</h2>
+
+    <label>Valor total</label>
+    <input type="number" id="valor" step="0.01" placeholder="Ex: 1000">
+
+    <label>Número de pessoas</label>
+    <input type="number" id="pessoas" min="1" placeholder="Ex: 4">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="resultado" class="resultado"></div>
+  </div>
+
+  <script>
+    function dinheiro(valor) {
+      return valor.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+    }
+
+    function calcular() {
+      const valor = parseFloat(document.getElementById('valor').value);
+      const pessoas = parseInt(document.getElementById('pessoas').value);
+      const resultado = document.getElementById('resultado');
+
+      if (isNaN(valor) || isNaN(pessoas) || valor <= 0 || pessoas <= 0) {
+        resultado.innerHTML = "Preencha os valores corretamente.";
+        return;
+      }
+
+      const partePorPessoa = valor / (pessoas + 1);
+
+      const reservaInicial = partePorPessoa;
+
+      const usuarioEspecial = reservaInicial / 5;
+
+      const reservaFinal = reservaInicial - usuarioEspecial;
+
+      resultado.innerHTML = `
+        <strong>Valor total:</strong> ${dinheiro(valor)}<br>
+        <strong>Pessoas:</strong> ${pessoas}<br><br>
+
+        <strong>Cada pessoa recebe:</strong> ${dinheiro(partePorPessoa)}<br><br>
+
+        <strong>Reserva inicial:</strong> ${dinheiro(reservaInicial)}<br>
+        <strong>Usuário especial recebe 1/5 da reserva:</strong> ${dinheiro(usuarioEspecial)}<br>
+        <strong>Reserva final:</strong> ${dinheiro(reservaFinal)}
+      `;
+    }
+  </script>
+
+</body>
+</html>
