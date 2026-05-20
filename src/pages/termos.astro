@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_NAME, organizationSchema } from "../lib/site";
+
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+---
+
+<BaseLayout
+  title="Termos"
+  description="Termos de uso e política editorial da Oficina de Contos Eróticos para leitura adulta, links externos e responsabilidade de uso."
+  canonicalURL={new URL("/termos/", siteUrl).href}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `Termos — ${SITE_NAME}`,
+    url: new URL("/termos/", siteUrl).href,
+    inLanguage: "pt-BR",
+    publisher: organizationSchema(siteUrl),
+  }}
+>
+  <main class="info-page">
+    <span class="kicker">termos</span>
+    <h1>Termos de uso</h1>
+
+    <div class="info-body">
+      <p>
+        A Oficina de Contos Eróticos publica conteúdo educativo e editorial sobre escrita, literatura e publicação em temas adultos.
+      </p>
+      <p>
+        O acesso é indicado para pessoas maiores de 18 anos ou para quem já tem idade legal para consumir conteúdo adulto em sua jurisdição.
+      </p>
+      <p>
+        O material não substitui orientação jurídica, médica, psicológica ou profissional. Use as informações como referência editorial e verifique regras de plataformas antes de publicar conteúdo próprio.
+      </p>
+      <p>
+        É proibido usar o site para promover conteúdo ilegal, exploração, violência sexual, material envolvendo menores ou qualquer prática que viole consentimento e legislação aplicável.
+      </p>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .info-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 32px 0;
+  }
+  @media(max-width:640px){.info-page{padding:48px 20px 0}}
+  .kicker {
+    display: block;
+    margin-bottom: 16px;
+    font: 700 11px/1 var(--font-sans);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--primary-strong);
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(44px, 7vw, 76px);
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0 0 40px;
+  }
+  .info-body {
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
+  }
+  p {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    line-height: 1.72;
+    color: var(--ink-90);
+    margin: 0 0 1.25em;
+  }
+</style>

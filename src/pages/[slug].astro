@@ -1,11 +1,12 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { postPath, postSlug } from "../lib/post-url";
 import { DEFAULT_OG_IMAGE, authorSchema, organizationSchema } from "../lib/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: postSlug(post) }, props: { post } }));
 }
 
 const { post } = Astro.props;
@@ -21,8 +22,9 @@ const wordCount = (post.body || "").split(/\s+/).length;
 const readMin = Math.max(1, Math.ceil(wordCount / 220));
 
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
-const canonicalUrl = new URL(`/${post.id}/`, siteUrl).href;
-const schemaImage = new URL(DEFAULT_OG_IMAGE, siteUrl).href;
+const canonicalUrl = new URL(postPath(post), siteUrl).href;
+const postImage = post.data.image ?? DEFAULT_OG_IMAGE;
+const schemaImage = new URL(postImage, siteUrl).href;
 const shareUrl = encodeURIComponent(decodeURI(canonicalUrl));
 const shareText = encodeURIComponent(post.data.title);
 const primaryTag = post.data.tags[0];
@@ -88,6 +90,7 @@ const structuredData = [
   ogType="article"
   publishedAt={post.data.publishedAt}
   updatedAt={post.data.updatedAt}
+  image={postImage}
   keywords={[
     post.data.title,
     ...post.data.tags,
@@ -120,6 +123,20 @@ const structuredData = [
       <Content />
     </div>
 
+    {faqItems.length > 0 && (
+      <section class="article-faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">Perguntas frequentes</h2>
+        <dl>
+          {faqItems.map((item) => (
+            <div class="faq-item">
+              <dt>{item.question}</dt>
+              <dd>{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+
     <footer class="reader-foot">
       <div class="end-rule">· · ·</div>
 
@@ -146,7 +163,7 @@ const structuredData = [
         <ul>
           {related.map(r => (
             <li>
-              <a class="rel-row" href={`/${r.id}/`}>
+              <a class="rel-row" href={postPath(r)}>
                 <h4>{r.data.title}</h4>
                 <p>{r.data.description}</p>
                 <span class="rel-cta">ler →</span>
@@ -382,6 +399,50 @@ const structuredData = [
     color: var(--primary-strong);
     letter-spacing: 0;
     font-size: 18px;
+  }
+
+  /* ── FAQ visível para acompanhar o JSON-LD ── */
+  .article-faq {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 44px 0 20px;
+    margin: 24px 0 48px;
+  }
+  .article-faq h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(28px, 3.8vw, 38px);
+    line-height: 1.12;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0 0 28px;
+  }
+  .article-faq dl {
+    margin: 0;
+  }
+  .faq-item {
+    padding: 0 0 24px;
+    margin: 0 0 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-item:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+  .faq-item dt {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 1.28;
+    color: var(--deep);
+    margin: 0 0 10px;
+  }
+  .faq-item dd {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.62;
+    color: var(--ink-70);
+    margin: 0;
   }
 
   /* ── Rodapé ── */

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { postPath } from "../lib/post-url";
 import { SITE_DESCRIPTION, SITE_NAME, organizationSchema } from "../lib/site";
 import { MIN_TRACK_POSTS, descriptionFromTag, slugifyTag, titleFromTag } from "../lib/trilhas";
 
@@ -103,7 +104,7 @@ function fmtShort(d: Date) {
 
     <section class="front-grid" aria-label="Destaques editoriais">
       <article class="hero">
-        <a href={`/${featured.id}/`} class="hero-anchor" aria-label={`Ler ${featured.data.title}`}></a>
+        <a href={postPath(featured)} class="hero-anchor" aria-label={`Ler ${featured.data.title}`}></a>
         <div class="hero-meta">
           <span class="hero-num">destaque</span>
           <span class="hero-divider"></span>
@@ -128,7 +129,7 @@ function fmtShort(d: Date) {
         <ol class="starter-list">
           {startPosts.map((post) => (
             <li>
-              <a href={`/${post.id}/`}>
+              <a href={postPath(post)}>
                 <strong>{post.data.title}</strong>
                 <span>{post.data.description}</span>
               </a>
@@ -165,7 +166,7 @@ function fmtShort(d: Date) {
       <ol class="arch-list">
         {latest.map((post, i) => (
           <li class="arch-item">
-            <a class="arch-row" href={`/${post.id}/`}>
+            <a class="arch-row" href={postPath(post)}>
               <span class="arch-num">{String(i + 2).padStart(2, "0")}</span>
               <div class="arch-body">
                 <h3 class="arch-h3">{post.data.title}</h3>

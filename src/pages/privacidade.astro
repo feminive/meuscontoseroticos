@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_NAME, organizationSchema } from "../lib/site";
+
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+---
+
+<BaseLayout
+  title="Privacidade"
+  description="Política de privacidade da Oficina de Contos Eróticos, com informações sobre dados técnicos, links externos e conteúdo para pessoas adultas."
+  canonicalURL={new URL("/privacidade/", siteUrl).href}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `Privacidade — ${SITE_NAME}`,
+    url: new URL("/privacidade/", siteUrl).href,
+    inLanguage: "pt-BR",
+    publisher: organizationSchema(siteUrl),
+  }}
+>
+  <main class="info-page">
+    <span class="kicker">privacidade</span>
+    <h1>Política de privacidade</h1>
+
+    <div class="info-body">
+      <p>
+        Este site é um arquivo editorial estático e não exige cadastro, login ou envio de dados pessoais para leitura.
+      </p>
+      <p>
+        Serviços de hospedagem, segurança, estatísticas ou navegadores podem registrar dados técnicos, como endereço IP, páginas acessadas, dispositivo, data, horário e origem aproximada do acesso.
+      </p>
+      <p>
+        Links externos levam a sites de terceiros, com políticas próprias. Ao sair da oficina, consulte as regras de privacidade da plataforma visitada.
+      </p>
+      <p>
+        O conteúdo aborda escrita erótica e é destinado a pessoas adultas. Não envie dados pessoais sensíveis por canais públicos ou comentários em plataformas externas.
+      </p>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .info-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 32px 0;
+  }
+  @media(max-width:640px){.info-page{padding:48px 20px 0}}
+  .kicker {
+    display: block;
+    margin-bottom: 16px;
+    font: 700 11px/1 var(--font-sans);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--primary-strong);
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(44px, 7vw, 76px);
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--deep);
+    margin: 0 0 40px;
+  }
+  .info-body {
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
+  }
+  p {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    line-height: 1.72;
+    color: var(--ink-90);
+    margin: 0 0 1.25em;
+  }
+</style>

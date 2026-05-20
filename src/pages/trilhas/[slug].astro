@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { postPath } from "../../lib/post-url";
 import { SITE_NAME, organizationSchema } from "../../lib/site";
 import { MIN_TRACK_POSTS, descriptionFromTag, slugifyTag, titleFromTag } from "../../lib/trilhas";
 
@@ -86,7 +87,7 @@ function fmt(d: Date) {
           "@type": "ListItem",
           position: index + 1,
           name: post.data.title,
-          url: new URL(`/${post.id}/`, siteUrl).href,
+          url: new URL(postPath(post), siteUrl).href,
         })),
       },
     },
@@ -130,7 +131,7 @@ function fmt(d: Date) {
         <ol>
           {posts.map((post, i) => (
             <li>
-              <a class="post-row" href={`/${post.id}/`}>
+              <a class="post-row" href={postPath(post)}>
                 <span class="num">{String(i + 1).padStart(2, "0")}</span>
                 <div>
                   <h2>{post.data.title}</h2>

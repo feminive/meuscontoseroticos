@@ -28,6 +28,11 @@ function readPostSitemapData() {
         body.match(/^updatedAt:\s*(.+)$/m)?.[1] ??
         body.match(/^publishedAt:\s*(.+)$/m)?.[1] ??
         body.match(/^published:\s*(.+)$/m)?.[1];
+      const slug =
+        body
+          .match(/^slug:\s*(.+)$/m)?.[1]
+          ?.trim()
+          .replace(/^["']|["']$/g, "") || id;
       const tagsValue = body.match(/^tags:\s*(.+)$/m)?.[1] ?? "";
       const tags = tagsValue
         .split(",")
@@ -36,6 +41,7 @@ function readPostSitemapData() {
 
       return {
         id,
+        slug,
         lastmod: date ? new Date(date).toISOString() : undefined,
         tags,
       };
@@ -48,6 +54,7 @@ function readPostSitemapData() {
     if (post.lastmod) {
       postLastmod.set(`/${post.id}/`, post.lastmod);
       postLastmod.set(`/${post.id.toLowerCase()}/`, post.lastmod);
+      postLastmod.set(`/${post.slug}/`, post.lastmod);
     }
     for (const tag of post.tags) {
       const slug = slugifyTag(tag);

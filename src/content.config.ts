@@ -11,6 +11,13 @@ const posts = defineCollection({
       publishedAt: z.date().optional(),
       updatedAt: z.date().optional(),
       chapter: z.number().optional(),
+      category: z.string().optional(),
+      slug: z
+        .string()
+        .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use um slug em kebab-case.")
+        .optional(),
+      excerpt: z.string().optional(),
+      readingTime: z.string().optional(),
       image: z.string().url().optional(),
       faq: z
         .array(
@@ -21,7 +28,10 @@ const posts = defineCollection({
         )
         .optional(),
       tags: z
-        .union([z.string(), z.array(z.string())])
+        .preprocess(
+          (value) => value ?? "",
+          z.union([z.string(), z.array(z.string())])
+        )
         .transform((value) =>
           Array.isArray(value)
             ? value
@@ -29,7 +39,10 @@ const posts = defineCollection({
                 .split(",")
                 .map((tag) => tag.trim())
                 .filter(Boolean)
-        ),
+        )
+        .refine((tags) => tags.length > 0, {
+          message: "Use pelo menos uma tag no frontmatter.",
+        }),
       featured: z.boolean().optional(),
     })
     .transform((data) => ({
