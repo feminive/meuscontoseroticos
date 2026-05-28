@@ -64,6 +64,13 @@ const jsonLd = structuredData
   {publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
   {updatedAt && <meta property="article:modified_time" content={updatedAt.toISOString()} />}
   {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-G5YYJD6YX7"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-G5YYJD6YX7');
+  </script>
   <link rel="stylesheet" href="/colors_and_type.css" />
   <script is:inline>
     (function(){
