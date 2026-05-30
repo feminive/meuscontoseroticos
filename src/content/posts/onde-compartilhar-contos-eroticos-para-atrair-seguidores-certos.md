@@ -1,16 +1,18 @@
 ---
-title: "Onde compartilhar contos eróticos para atrair seguidores certos"
-description: >-
-  Descubra onde divulgar contos eróticos, quais redes evitam bloqueios desnecessários e como atrair leitores adultos que realmente acompanham, comentam e voltam.
+title: Onde compartilhar contos eróticos para atrair seguidores certos
+description: Descubra onde divulgar contos eróticos, quais redes evitam bloqueios desnecessários e como atrair leitores adultos que realmente acompanham, comentam e voltam.
 published: 2026-04-30T03:45:00-03:00
-tags: "dicas, plataformas, divulgação"
+tags:
+  - dicas
+  - plataformas
+  - divulgação
 faq:
-  - question: "Onde posso compartilhar contos eróticos sem depender só de redes sociais?"
-    answer: "Use uma plataforma de leitura ou site próprio como base principal e deixe redes sociais para descoberta. Assim o texto fica organizado, encontrável e menos vulnerável a mudanças de algoritmo."
-  - question: "Quais plataformas são melhores para atrair leitores de contos eróticos?"
-    answer: "Reddit, X, AO3, Spirit, newsletter e site próprio podem funcionar bem, mas cada um cumpre uma função diferente. O ideal é separar descoberta, leitura e retenção."
-  - question: "Vale publicar contos eróticos no Instagram ou Facebook?"
-    answer: "Vale apenas com cuidado, usando chamadas indiretas, estética discreta e links para uma base externa. Essas redes não são boas casas para conteúdo explícito."
+  - question: Onde posso compartilhar contos eróticos sem depender só de redes sociais?
+    answer: Use uma plataforma de leitura ou site próprio como base principal e deixe redes sociais para descoberta. Assim o texto fica organizado, encontrável e menos vulnerável a mudanças de algoritmo.
+  - question: Quais plataformas são melhores para atrair leitores de contos eróticos?
+    answer: Reddit, X, AO3, Spirit, newsletter e site próprio podem funcionar bem, mas cada um cumpre uma função diferente. O ideal é separar descoberta, leitura e retenção.
+  - question: Vale publicar contos eróticos no Instagram ou Facebook?
+    answer: Vale apenas com cuidado, usando chamadas indiretas, estética discreta e links para uma base externa. Essas redes não são boas casas para conteúdo explícito.
 ---
 
 
